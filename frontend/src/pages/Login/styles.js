@@ -24,7 +24,7 @@ export const Container = styled.div`
 
       .form {
         width: 50%;
-        height: 75%;
+        height: 70%;
         max-height: 50rem;
         display: flex;
         flex-direction: column;
@@ -57,12 +57,12 @@ export const Container = styled.div`
           align-items: flex-start;
           justify-content: center;
         }
+        
         .submit-button {
           width: 100%;
           display: flex;
           align-items: center;
           justify-content: center;
-          margin-top: 2rem;
         }
       }
     }

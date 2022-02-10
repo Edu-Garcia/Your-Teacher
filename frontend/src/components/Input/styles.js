@@ -7,7 +7,7 @@ export const Container = styled.div`
 
   label {
     display: block;
-    color: #282828;
+    color: #1a1a1a;
     padding-bottom: 1rem;
   }
 

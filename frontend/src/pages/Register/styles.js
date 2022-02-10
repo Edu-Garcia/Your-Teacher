@@ -18,7 +18,53 @@ export const Container = styled.div`
     
     .mainForm {
       width: 110%;
-      background-color: purple;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .form {
+        width: 50%;
+        height: 90%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        .title {
+          h1 {
+            font-size: 5rem;
+            font-weight: 500;
+            position: relative;
+          }
+        
+          h1::after {
+            content: '';
+            display: block;
+            width: 3rem;
+            height: 1rem;
+            background-color: #782FD2;
+            position: absolute;
+            border-radius: 1rem;
+            bottom: 0;
+            left: 0.2rem;
+          }
+        }
+
+        form {
+          width: 100%;
+          height: 80%;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: center;
+        }
+
+        .submit-button {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
     }
   }
 `
