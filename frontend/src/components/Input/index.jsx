@@ -1,6 +1,7 @@
+import { InputError } from '../InputError';
 import { Container } from './styles';
 
-export const Input = ({ label, name, register, ...inputProps }) => {
+export const Input = ({ label, name, register, error, ...inputProps }) => {
   return (
     <Container>
       <label>{label}</label>
@@ -9,6 +10,7 @@ export const Input = ({ label, name, register, ...inputProps }) => {
         {...register(name)} 
         {...inputProps} 
       />
+      {error && <InputError type={error.type} field={name} />}
     </Container>
   )
 }

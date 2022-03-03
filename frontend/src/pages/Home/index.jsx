@@ -38,8 +38,8 @@ export const Home = () => {
             Cadastre-se
           </p>
           <Button 
-            width='19rem' 
-            height='5rem'
+            // width='19rem' 
+            // height='5rem'
             onClick={() => navigate('/register')}
           >
             Cadastro

@@ -1,0 +1,25 @@
+{
+  "fullname": {
+    "required": "Nome é um campo obrigatório"
+  },
+  "email": {
+    "required": "E-mail é um campo obrigatório",
+    "email": "Informe um e-mail válido"
+  },
+  "password": {
+    "required": "Senha é um campo obrigatório"
+  },
+  "confirmPassword": {
+    "required": "Confirmar Senha é um campo obrigatório",
+    "oneOf": "Senha não confere"
+  },
+  "phone": {
+    "required": "Telefone é um campo obrigatório",
+    "matches": "Número inválido"
+  },
+  "birthDate": {
+    "typeError": "Data de Nascimento é um campo obrigatório",
+    "min": "Data informada inválida",
+    "of-age": "É necessário ter 18 anos ou mais para realizar o cadastro"
+  }
+}

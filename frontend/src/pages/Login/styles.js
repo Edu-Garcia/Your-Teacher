@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   .main {
     width: 100%;
-    height: calc(100vh - 7rem);
+    height: 92vh;
     display: flex;
 
     .image {
@@ -29,24 +29,26 @@ export const Container = styled.div`
         display: flex;
         flex-direction: column;
         align-items: flex-start;
+        justify-content: space-between;
 
         .title {
           h1 {
             font-size: 5rem;
             font-weight: 500;
             position: relative;
+            
+            ::after {
+              content: '';
+              display: block;
+              width: 3rem;
+              height: 1rem;
+              background-color: #782FD2;
+              position: absolute;
+              border-radius: 1rem;
+              bottom: 0;
+            }
           }
         
-          h1::after {
-            content: '';
-            display: block;
-            width: 3rem;
-            height: 1rem;
-            background-color: #782FD2;
-            position: absolute;
-            border-radius: 1rem;
-            bottom: 0;
-          }
         }
 
         form {
@@ -56,6 +58,7 @@ export const Container = styled.div`
           flex-direction: column;
           align-items: flex-start;
           justify-content: center;
+          gap: 2rem;
         }
         
         .submit-button {
@@ -63,6 +66,11 @@ export const Container = styled.div`
           display: flex;
           align-items: center;
           justify-content: center;
+
+          button {
+            width: 20rem;
+            height: 5rem;
+          }
         }
       }
     }

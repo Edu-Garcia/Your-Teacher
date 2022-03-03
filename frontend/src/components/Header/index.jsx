@@ -1,8 +1,12 @@
+import { useState } from 'react';
+
 import { Button } from "../Button"
 import { Container } from "./styles"
 import { useNavigate } from 'react-router-dom'
+import { StyledDropdown } from '../StyledDropdown';
+import { SearchField } from '../SearchField';
 
-export const Header = ({ search, link, buttonText }) => {
+export const Header = ({ search, link, buttonText, profile }) => {
   let navigate = useNavigate();
 
   return (
@@ -10,18 +14,22 @@ export const Header = ({ search, link, buttonText }) => {
       <h1 className="homepage" onClick={() => navigate('/')}>YourTeacher</h1>
 
       {search && (
-        <h1>Barra de pesquisa</h1>
+        <SearchField search placeholder="Procure a disciplina que deseja" />
       )}
 
-      <Button 
-        width='15rem'
-        height='4rem'
-        color='#51238A'
-        background='white'
-        onClick={() => navigate(`${link}`)}
-      >
-        {buttonText}
-      </Button>
+      {buttonText && (
+        <Button
+          color='#51238A'
+          background='white'
+          onClick={() => navigate(`${link}`)}
+        >
+          {buttonText}
+        </Button>
+      )}
+      
+      {profile && (
+        <StyledDropdown className='profile' profile={profile.username} />
+      )}
     </Container>
   )
 }

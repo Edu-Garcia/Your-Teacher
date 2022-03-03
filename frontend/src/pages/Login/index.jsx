@@ -1,13 +1,32 @@
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+
 import { Container } from './styles';
 import { Button } from '../../components/Button';
 import { Header } from '../../components/Header';
 import { Input } from '../../components/Input';
-import { useForm } from 'react-hook-form';
+
+//TODO tirar import
+import { useNavigate } from 'react-router-dom'
 
 export const Login = () => {
-  const { register, handleSubmit} = useForm();
+  const schema = yup.object().shape({
+    email: yup.string().email().required(),
+    password: yup.string().required(),
+  })
 
-  const onSubmit = data => console.log(data);
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  const onSubmit = (user) => {
+    console.log(user);
+  }
+
+  //TODO tirar metodo
+  const navigate = useNavigate();
 
   return (
     <Container>
@@ -24,13 +43,15 @@ export const Login = () => {
                 label='E-mail' 
                 name='email' 
                 register={register}
-                type='text' 
+                type='text'
+                error={errors?.email}
               />
               <Input 
                 label='Senha' 
                 name='password' 
                 register={register}
-                type='password' 
+                type='password'
+                error={errors?.password}
               />
             </form>
             <div className='submit-button'>
@@ -38,7 +59,9 @@ export const Login = () => {
                 width='20rem'
                 height='5rem'
                 type='submit'
-                onClick={handleSubmit(onSubmit)}
+                // onClick={handleSubmit(onSubmit)}
+                // TODO trocar onclick
+                onClick={() => navigate('/search')}
                 background='#3E1469'
               >
                 Enviar

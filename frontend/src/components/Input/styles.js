@@ -2,8 +2,11 @@ import styled from "styled-components"
 
 export const Container = styled.div`
   width: 100%;
-  font-size: 2.5rem;
-  padding: 1rem 0;
+  font-size: 2rem;
+
+  @media (min-height: 650px) {
+    font-size: 2.5rem;
+  }
 
   label {
     display: block;
@@ -12,6 +15,10 @@ export const Container = styled.div`
   }
 
   input {
+    ::-webkit-input-placeholder{
+      color: #cccccc;
+    }
+
     width: 100%;
     height: 4rem;
     font-size: 1.8rem;
