@@ -5,7 +5,7 @@ export const StyledPopover = ({ name, children, width }) => {
   return (
     <Root>
       <StyledTrigger width={width}>{name}</StyledTrigger>
-      <StyledContent sideOffset={10}>
+      <StyledContent sideOffset={13}>
         {children}
       </StyledContent>
     </Root>

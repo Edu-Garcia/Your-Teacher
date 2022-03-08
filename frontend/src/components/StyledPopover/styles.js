@@ -25,11 +25,12 @@ export const StyledTrigger = styled(Trigger)`
   &[data-state="open"] {
     background-color: #fff;
     color: #66439B;
+    font-weight: 500;
   }
 `;
 
 export const StyledContent = styled(Content)`
-  min-width: 12rem;
+  min-width: 20rem;
   display: flex;
   outline: none;
   justify-content: center;
@@ -39,7 +40,8 @@ export const StyledContent = styled(Content)`
   
   background-color: white;
   border-radius: 0.6rem;
-  padding: 0.5rem;
+  padding: 1rem;
+  gap: 0.5rem;
 
   box-shadow: 
     0px 10px 38px -10px rgba(22, 23, 24, 0.35),

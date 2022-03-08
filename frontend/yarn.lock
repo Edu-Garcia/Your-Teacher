@@ -494,6 +494,22 @@
     "@babel/runtime" "^7.13.10"
     "@radix-ui/react-primitive" "0.1.4"
 
+"@radix-ui/react-checkbox@^0.1.5":
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/@radix-ui/react-checkbox/-/react-checkbox-0.1.5.tgz#3a6bd54ba1720c8e5c03852acf460e35dfbe9da3"
+  integrity sha512-M8Y4dSXsKSbF+FryG5VvZKr/1MukMVG7swq9p5s7wYb8Rvn0UM0rQ5w8BWmSWSV4BL/gbJdhwVCznwXXlgZRZg==
+  dependencies:
+    "@babel/runtime" "^7.13.10"
+    "@radix-ui/primitive" "0.1.0"
+    "@radix-ui/react-compose-refs" "0.1.0"
+    "@radix-ui/react-context" "0.1.1"
+    "@radix-ui/react-label" "0.1.5"
+    "@radix-ui/react-presence" "0.1.2"
+    "@radix-ui/react-primitive" "0.1.4"
+    "@radix-ui/react-use-controllable-state" "0.1.0"
+    "@radix-ui/react-use-previous" "0.1.1"
+    "@radix-ui/react-use-size" "0.1.1"
+
 "@radix-ui/react-collection@0.1.4":
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/@radix-ui/react-collection/-/react-collection-0.1.4.tgz#734061ffd5bb93e88889d49b87391a73a63824c9"
@@ -570,6 +586,17 @@
   dependencies:
     "@babel/runtime" "^7.13.10"
     "@radix-ui/react-use-layout-effect" "0.1.0"
+
+"@radix-ui/react-label@0.1.5":
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/@radix-ui/react-label/-/react-label-0.1.5.tgz#12cd965bfc983e0148121d4c99fb8e27a917c45c"
+  integrity sha512-Au9+n4/DhvjR0IHhvZ1LPdx/OW+3CGDie30ZyCkbSHIuLp4/CV4oPPGBwJ1vY99Jog3zyQhsGww9MXj8O9Aj/A==
+  dependencies:
+    "@babel/runtime" "^7.13.10"
+    "@radix-ui/react-compose-refs" "0.1.0"
+    "@radix-ui/react-context" "0.1.1"
+    "@radix-ui/react-id" "0.1.5"
+    "@radix-ui/react-primitive" "0.1.4"
 
 "@radix-ui/react-menu@0.1.6":
   version "0.1.6"
@@ -725,6 +752,13 @@
   dependencies:
     "@babel/runtime" "^7.13.10"
 
+"@radix-ui/react-use-previous@0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@radix-ui/react-use-previous/-/react-use-previous-0.1.1.tgz#0226017f72267200f6e832a7103760e96a6db5d0"
+  integrity sha512-O/ZgrDBr11dR8rhO59ED8s5zIXBRFi8MiS+CmFGfi7MJYdLbfqVOmQU90Ghf87aifEgWe6380LA69KBneaShAg==
+  dependencies:
+    "@babel/runtime" "^7.13.10"
+
 "@radix-ui/react-use-rect@0.1.1":
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/@radix-ui/react-use-rect/-/react-use-rect-0.1.1.tgz#6c15384beee59c086e75b89a7e66f3d2e583a856"
@@ -825,6 +859,13 @@ aria-hidden@^1.1.1:
   integrity sha512-RhVWFtKH5BiGMycI72q2RAFMLQi8JP9bLuQXgR5a8Znp7P5KOIADSJeyfI8PCVxLEp067B2HbP5JIiI/PXIZeA==
   dependencies:
     tslib "^1.0.0"
+
+axios@^0.26.0:
+  version "0.26.0"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.26.0.tgz#9a318f1c69ec108f8cd5f3c3d390366635e13928"
+  integrity sha512-lKoGLMYtHvFrPVt3r+RBMp9nh34N0M8zEfCWqdWZx6phynIEhQqAdydpyBAAG211zlhX9Rgu08cOamy6XjE5Og==
+  dependencies:
+    follow-redirects "^1.14.8"
 
 babel-plugin-macros@^2.6.1:
   version "2.8.0"
@@ -1103,6 +1144,11 @@ find-root@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/find-root/-/find-root-1.1.0.tgz#abcfc8ba76f708c42a97b3d685b7e9450bfb9ce4"
   integrity sha512-NKfW6bec6GfKc0SGx1e07QZY9PE99u0Bft/0rzSD5k3sO/vwkVUpDUKVm5Gpp5Ue3YfShPFTX2070tDs5kB9Ng==
+
+follow-redirects@^1.14.8:
+  version "1.14.9"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.9.tgz#dd4ea157de7bfaf9ea9b3fbd85aa16951f78d8d7"
+  integrity sha512-MQDfihBQYMcyy5dhRDJUHcw7lb2Pv/TuE6xP1vyraLukNDHKbDxDNaOE3NbCAdKQApno+GPRyo1YAp89yCjK4w==
 
 fsevents@~2.3.2:
   version "2.3.2"
