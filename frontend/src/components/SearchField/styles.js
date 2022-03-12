@@ -16,6 +16,7 @@ export const Container = styled.div`
 
   input {
     width: 100%;
+    height: 100%;
     padding: 0 0.5rem;
     outline: none;
     border: none;
@@ -31,5 +32,14 @@ export const Container = styled.div`
   svg {
     font-size: 2rem;
     margin: 0 0.5rem;
+  }
+
+  @media (min-height: 768px) {
+    width: 26rem;
+    height: 4rem;
+
+    input {
+      font-size: 1.5rem;
+    }
   }
 `;

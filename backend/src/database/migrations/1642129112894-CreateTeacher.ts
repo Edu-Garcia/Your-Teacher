@@ -21,6 +21,18 @@ export class CreateTeacher1642129112894 implements MigrationInterface {
             type: "varchar"
           },
           {
+            name: "attendance",
+            type: "varchar"
+          },
+          {
+            name: "state",
+            type: "varchar"
+          },
+          {
+            name: "city",
+            type: "varchar"
+          },
+          {
             name: "user_id",
             type: "uuid"
           },

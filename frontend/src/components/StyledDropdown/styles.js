@@ -22,6 +22,7 @@ export const StyledTrigger = styled(Trigger)`
 
 export const StyledContent = styled(Content)`
   min-width: 12rem;
+  /* height: 10rem; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -47,7 +48,7 @@ export const StyledItem = styled(Item)`
   text-align: center;
   background-color: #fff;
   color: #471779;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   transition: all .2s;
 
   :focus {

@@ -1,37 +1,51 @@
 import { useEffect, useState } from 'react';
-import { StyledPopover } from '../StyledPopover';
-import { Container, ClearSpan, LabelPopover, ButtonPopover } from "./styles"
 import { Refresh } from '@mui/icons-material'
-import { fetchCitiesForState, fetchStates, parseCities, parseStates } from '../../utils/ibge';
+import { StyledPopover } from '../StyledPopover';
+import { InputCurrency } from '../InputCurrency';
 import { StyledSelect } from '../StyledSelect';
+import { Container, ClearSpan, LabelPopover, ButtonPopover } from "./styles"
+import { fetchCitiesForState, fetchStates, parseCities, parseStates } from '../../utils/ibge';
 
 export const FilterContainer = () => {
 
   const [presentialChecked, setPresentialChecked] = useState(false);
   const [remoteChecked, setRemoteChecked] = useState(false);
+  const [cleared, setCleared] = useState(false);
   const [selectValues, setSelectValues] = useState({});
+  const [schoolLevel, setSchoolLevel] = useState({});
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
+  const [price, setPrice] = useState();
+
+  const schoolLevelList = [
+    { label: 'Selecione a escolaridade...', value: ''},
+    { label: 'Infantil', value: 'infantil'},
+    { label: 'Fundamental', value: 'fundamental'},
+    { label: 'Médio', value: 'medio'},
+    { label: 'Superior', value: 'superior'},
+    { label: 'Pós-graduação', value: 'pos_graduacao'},
+    { label: 'Mestrado', value: 'mestrado'},
+    { label: 'Doutorado', value: 'doutorado'},
+  ]
 
   const handleClearFilters = () => {
+    setSelectValues({ cleared: cleared, state: cleared });
     setPresentialChecked(false);
     setRemoteChecked(false);
-    setSelectValues({
-      cleared: true
-    });
+    setCleared(!cleared)
     setStates([]);
     setCities([]);
+    setPrice(null)
+    setSchoolLevel('');
   }
 
   useEffect(() => {
     fetchStates().then(parseStates).then(setStates);
-    console.log('states:', states)
   }, [selectValues.cleared]);
 
   useEffect(() => {
     setCities([{ label: 'Carregando...', value: '' }]);
     fetchCitiesForState(selectValues.state).then(parseCities).then(setCities);
-    console.log('cities:', cities)
   }, [selectValues.state]);
 
   const handleSelectChange = (e) => {
@@ -44,8 +58,6 @@ export const FilterContainer = () => {
       setSelectValues({ ...selectValues, [name]: value })
     }
   }
-
-  console.log('selectValues:', selectValues)
 
   return (
     <Container>
@@ -68,27 +80,39 @@ export const FilterContainer = () => {
       </StyledPopover>
       <StyledPopover name="Local" width="8rem">
         <LabelPopover>Estado:</LabelPopover>
-          <StyledSelect
-            id='state' 
-            name='state'
-            data={states}
-            currentValue={selectValues.state}
-            onChange={handleSelectChange}
-          />
+        <StyledSelect
+          id='state' 
+          name='state'
+          data={states}
+          currentValue={selectValues.state}
+          onChange={handleSelectChange}
+        />
         <LabelPopover>Cidade:</LabelPopover>
-          <StyledSelect 
-            id='city' 
-            name='city' 
-            data={cities} 
-            currentValue={selectValues.city}
-            onChange={handleSelectChange}
-          />
+        <StyledSelect 
+          id='city' 
+          name='city' 
+          data={cities} 
+          currentValue={selectValues.city}
+          onChange={handleSelectChange}
+        />
       </StyledPopover>
       <StyledPopover name="Preço" width="8rem">
-        <h1>teste</h1>
+        <LabelPopover>Preço Máximo:</LabelPopover>
+        <InputCurrency 
+          value={price ? price : ''}
+          onChange={(text) => setPrice(text)}
+          placeholder="Ex.: 100,00"
+        />
       </StyledPopover>
       <StyledPopover name="Grau de ensino" width="12rem">
-        <h1>teste</h1>
+        <LabelPopover>Escolaridade:</LabelPopover>
+        <StyledSelect 
+          id='schoolLevel' 
+          name='schoolLevel' 
+          data={schoolLevelList} 
+          currentValue={schoolLevel}
+          onChange={(e) => setSchoolLevel(e.target.value)}
+        />
       </StyledPopover>
       <ClearSpan onClick={handleClearFilters}>
         <Refresh />

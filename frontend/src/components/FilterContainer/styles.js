@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
-  height: 8.5vh;
+  height: 6rem;
   background-color: #461974;
   color: #fff;
   padding: 1rem 2rem;
@@ -42,7 +42,7 @@ export const ClearSpan = styled.span`
 
 export const LabelPopover = styled.label`
   display: block;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   color: #471779;
   font-weight: 500;
   margin-bottom: 0.5rem;
