@@ -1,14 +1,27 @@
 import "reflect-metadata";
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
+import 'express-async-errors';
+
+import { router } from './routes';
+
+import './database';
 
 const app = express();
 
-app.get("/api/test", (request, response) => {
-  return response.send('teste get')
-})
+app.use(express.json());
+app.use(router);
 
-app.post("/api/test-post", (request, response) => {
-  return response.send('teste post')
+app.use((err: Error, request: Request, response: Response, next: NextFunction) => {
+  if (err instanceof Error) {
+    return response.status(400).json({
+      error: err.message
+    })
+  }
+
+  return response.status(500).json({
+    status: 'error',
+    message: 'Erro Interno do Servidor'
+  })
 })
 
 app.listen(3060, () => console.log("server is running"))

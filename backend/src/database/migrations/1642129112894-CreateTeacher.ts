@@ -42,7 +42,9 @@ export class CreateTeacher1642129112894 implements MigrationInterface {
             name: "fk_teacher_user",
             columnNames: ["user_id"],
             referencedTableName: "tb_user",
-            referencedColumnNames: ["user_id"]
+            referencedColumnNames: ["user_id"],
+            onDelete: "CASCADE",
+            onUpdate: "CASCADE"
           }
         ]
       })
