@@ -1,3 +1,4 @@
+import { Exclude } from "class-transformer";
 import { Entity, PrimaryColumn, Column, JoinColumn, OneToOne } from "typeorm";
 import { v4 as uuid } from "uuid";
 import { User } from "./User";
@@ -23,11 +24,12 @@ class Teacher {
   @Column()
   city: string;
 
+  @Exclude()
   @Column()
   user_id: string;
 
   @JoinColumn({ name: "user_id" })
-  @OneToOne(() => User)
+  @OneToOne(() => User, { eager: true })
   user: User;
 
   constructor() {

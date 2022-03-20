@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
-import { CreateUserService } from "../services/CreateUserService";
-
+import { CreateUserService } from "../services";
 
 class CreateUserController {
 
@@ -10,7 +9,7 @@ class CreateUserController {
     const createUserService = new CreateUserService();
 
     const user = await createUserService.execute({
-      fullname,
+      fullname: fullname.toLowerCase(),
       email,
       password,
       confirmPassword,

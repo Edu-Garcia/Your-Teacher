@@ -16,6 +16,13 @@ export const ImageCard = styled.div`
   background-color: #c0c0c0;
   border-radius: 1.5rem 1.5rem 0 0;
   transition: all .2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    font-size: 5rem;
+  }
 
   img {
     width: 100%;

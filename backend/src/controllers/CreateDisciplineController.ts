@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { CreateDisciplineService } from "../services/CreateDisciplineService";
+import { CreateDisciplineService } from "../services";
 
 class CreateDisciplineController {
 

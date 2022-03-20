@@ -1,5 +1,5 @@
 import { getCustomRepository } from "typeorm";
-import { DisciplinesRepositories } from "../repositories/DisciplinesRepositories";
+import { DisciplinesRepositories } from "../repositories";
 
 interface IDisciplineRequest {
   name: string;

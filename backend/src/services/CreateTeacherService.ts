@@ -1,6 +1,5 @@
 import { getCustomRepository } from "typeorm";
-import { TeachersRepositories } from "../repositories/TeachersRepositories";
-import { UsersRepositories } from "../repositories/UsersRepositories";
+import { TeachersRepositories, UsersRepositories } from "../repositories";
 
 interface ITeacherRequest {
   biography: string;

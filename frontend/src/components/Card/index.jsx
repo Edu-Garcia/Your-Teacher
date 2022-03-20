@@ -1,4 +1,5 @@
 import { ButtonCard, Container, DetailsCard, ImageCard } from "./styles"
+import NoPhotographyIcon from '@mui/icons-material/NoPhotography';
 
 export const Card = ({ props }) => {
 
@@ -18,7 +19,7 @@ export const Card = ({ props }) => {
       <ImageCard>
         {image 
           ? <img src={image} alt="" />
-          : <span>Sem Foto</span>
+          : <NoPhotographyIcon />
         }
       </ImageCard>
       <DetailsCard>

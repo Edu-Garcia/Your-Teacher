@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
-import { CreateTeacherService } from "../services/CreateTeacherService";
-
+import { CreateTeacherService } from "../services";
 
 class CreateTeacherController {
 
