@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { verify } from 'jsonwebtoken';
 
 interface IPayload {
+  user: Object;
   sub: string
 }
 
@@ -21,8 +22,10 @@ export function ensureAuthenticated(
   const [, token] = authToken.split(" ");
 
   try {
-    const { sub } = verify(token, "5dd7aae0dbc48d434b17fca1433b4283") as IPayload;
+    const { user, sub } = verify(token, process.env.JWT_KEY) as IPayload;
+
     request.user_id = sub;
+    request.user_data = user;
 
     return next()
   } catch (err) {

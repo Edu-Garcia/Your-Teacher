@@ -8,7 +8,7 @@ interface IUserRequest {
   password: string;
   confirmPassword: string;
   birth_date: Date;
-  phone: string
+  phone: string;
 }
 
 class CreateUserService {
@@ -24,13 +24,13 @@ class CreateUserService {
       );
     };
 
-    const usersRepository = getCustomRepository(UsersRepositories);
+    const usersRepositories = getCustomRepository(UsersRepositories);
 
     if (!email) {
       throw new Error("E-mail incorreto!");
     }
 
-    const userAlreadyExist = await usersRepository.findOne({ email });
+    const userAlreadyExist = await usersRepositories.findOne({ email });
 
     if (userAlreadyExist) {
       throw new Error("E-mail já cadastrado!");
@@ -54,7 +54,7 @@ class CreateUserService {
 
     const passwordHash = await hash(password, 8);
 
-    const user = usersRepository.create({
+    const user = usersRepositories.create({
       fullname,
       email,
       password: passwordHash,
@@ -62,7 +62,7 @@ class CreateUserService {
       phone
     });
 
-    await usersRepository.save(user);
+    await usersRepositories.save(user);
 
     return user;
   }

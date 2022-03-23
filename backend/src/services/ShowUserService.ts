@@ -8,7 +8,7 @@ class ShowUserService {
 
     const user = usersRepositories.findOne({ user_id });
 
-    return user;
+    return instanceToPlain(user);
   }
 }
 

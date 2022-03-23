@@ -6,13 +6,13 @@ import {
 } from "../repositories";
 
 interface IAnnouncementRequest {
-  title: string,
-  description: string,
-  cost: number,
-  school_level: string,
-  image_name: string,
-  user_id: string,
-  discipline_id: string,
+  title: string;
+  description: string;
+  cost: number;
+  school_level: string;
+  image_name: string;
+  user_id: string;
+  discipline_id: string;
 }
 
 class CreateAnnouncementService {
