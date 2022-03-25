@@ -35,7 +35,7 @@ export const Header = ({ search, link, buttonText, profile }) => {
       )}
       
       {profile && (
-        <StyledDropdown className='profile' profile={profile.username} />
+        <StyledDropdown className='profile' profile={profile} />
       )}
     </Container>
   )

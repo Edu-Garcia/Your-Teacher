@@ -7,7 +7,8 @@
     "email": "Informe um e-mail válido"
   },
   "password": {
-    "required": "Senha é um campo obrigatório"
+    "required": "Senha é um campo obrigatório",
+    "min": "Mínimo de 8 caracteres"
   },
   "confirmPassword": {
     "required": "Confirmar Senha é um campo obrigatório",

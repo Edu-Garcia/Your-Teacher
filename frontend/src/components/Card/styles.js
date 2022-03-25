@@ -21,7 +21,7 @@ export const ImageCard = styled.div`
   align-items: center;
 
   svg {
-    font-size: 5rem;
+    font-size: 6rem;
   }
 
   img {

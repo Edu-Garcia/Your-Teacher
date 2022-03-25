@@ -14,7 +14,7 @@ export const Register = () => {
   const schema = yup.object().shape({
     fullname: yup.string().required(),
     email: yup.string().email().required(),
-    password: yup.string().required(),
+    password: yup.string().min(8).required(),
     phone: yup.string().matches(phoneNumber).required(),
     confirmPassword: yup
       .string()

@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom'
 import { Settings, Logout } from '@mui/icons-material'
 import { Root, StyledTrigger, StyledContent, StyledItem } from './styles'
+import { Auth } from '../../context/AuthContext';
 
 export const StyledDropdown = ({ profile }) => {
+  const { token, setToken } = useContext(Auth);
 
   const navigate = useNavigate();
+
+  const handleLogout = () => {
+    if (token) {
+      setToken(null);
+      navigate('/', { replace: true });
+    }
+  }
 
   return (
     <Root>
@@ -17,7 +26,7 @@ export const StyledDropdown = ({ profile }) => {
             Configurações
           </>
         </StyledItem>
-        <StyledItem onSelect={() => navigate('/')}>
+        <StyledItem onSelect={handleLogout}>
           <>
             <Logout />
             Sair

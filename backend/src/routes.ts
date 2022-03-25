@@ -1,4 +1,8 @@
-import { Router } from 'express';
+import express from 'express';
+import cors from 'cors';
+import path from 'path';
+import { multerConfig } from './config/multer';
+import multer from 'multer';
 import { ensureTeacher, ensureAuthenticated } from './middlewares'
 import {
   CreateUserController,
@@ -20,10 +24,7 @@ import {
   UpdateAnnouncementController
 } from './controllers'
 
-import { multerConfig } from './config/multer';
-import multer from 'multer';
-
-const router = Router();
+const router = express();
 
 const authenticateUserController = new AuthenticateUserController();
 
@@ -46,6 +47,16 @@ const updateUserController = new UpdateUserController();
 const updateTeacherController = new UpdateTeacherController();
 const updateDisciplineController = new UpdateDisciplineController();
 const updateAnnouncementController = new UpdateAnnouncementController();
+
+router.use('/files', express.static(path.resolve('uploads')));
+
+router.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.header("Access-Control-Allow-Headers", "X-PINGOTHER, Content-Type, Authorization");
+  router.use(cors());
+  next();
+});
 
 router.post("/api/users", createUserController.handle);
 router.post("/api/login", authenticateUserController.handle);

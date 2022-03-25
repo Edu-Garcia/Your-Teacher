@@ -1,17 +1,24 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import api from '../../config/api'
+import toast from 'react-hot-toast';
 
 import { Container } from './styles';
+import { Auth } from '../../context/AuthContext';
 import { Button } from '../../components/Button';
 import { Header } from '../../components/Header';
 import { Input } from '../../components/Input';
-
-//TODO tirar import
-import { useNavigate } from 'react-router-dom'
+import { Toast } from '../../components/Toast';
 
 export const Login = () => {
+
+  const { token, setToken } = useContext(Auth);
+
+  const navigate = useNavigate();
+
   const schema = yup.object().shape({
     email: yup.string().email().required(),
     password: yup.string().required(),
@@ -21,12 +28,27 @@ export const Login = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (user) => {
-    console.log(user);
-  }
+  useEffect(() => {
+    if (token) {
+      navigate('/search', { replace: true });
+    }
+  },[])
 
-  //TODO tirar metodo
-  const navigate = useNavigate();
+  const onSubmit = async (user) => {
+
+    try {
+      const { data } = await api.post('/api/login', user);
+
+      if (data) {
+        setToken(data);
+        navigate('/search', { replace: true });
+        toast.success('Login realizado com sucesso');
+      }
+    } catch (error) {
+      toast.error('Usuário ou senha inválidos');
+      console.log(error)
+    }
+  }
 
   return (
     <Container>
@@ -59,13 +81,14 @@ export const Login = () => {
                 width='20rem'
                 height='5rem'
                 type='submit'
-                // onClick={handleSubmit(onSubmit)}
+                onClick={handleSubmit(onSubmit)}
                 // TODO trocar onclick
-                onClick={() => navigate('/search')}
+                // onClick={() => navigate('/search')}
                 background='#3E1469'
               >
                 Enviar
               </Button>
+              <Toast />
             </div>
           </div>
         </div>
