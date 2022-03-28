@@ -8,7 +8,7 @@ class ShowTeacherService {
 
     const teacher = teachersRepositories.findOne({ user_id });
 
-    return teacher;
+    return instanceToPlain(teacher);
   }
 }
 

@@ -1,51 +1,64 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Refresh } from '@mui/icons-material'
 import { StyledPopover } from '../StyledPopover';
 import { InputCurrency } from '../InputCurrency';
 import { StyledSelect } from '../StyledSelect';
-import { Container, ClearSpan, LabelPopover, ButtonPopover } from "./styles"
+import { Container, ClearSpan, LabelPopover, ButtonPopover, ActiveButton } from "./styles"
 import { fetchCitiesForState, fetchStates, parseCities, parseStates } from '../../utils/ibge';
 
-export const FilterContainer = () => {
+export const FilterContainer = ({props}) => {
 
-  const [presentialChecked, setPresentialChecked] = useState(false);
-  const [remoteChecked, setRemoteChecked] = useState(false);
-  const [cleared, setCleared] = useState(false);
-  const [selectValues, setSelectValues] = useState({});
-  const [schoolLevel, setSchoolLevel] = useState({});
-  const [states, setStates] = useState([]);
-  const [cities, setCities] = useState([]);
-  const [price, setPrice] = useState();
+  const {
+    myAnnouncements,
+    presentialChecked,
+    remoteChecked,
+    cleared,
+    selectValues,
+    schoolLevel,
+    states,
+    cities,
+    price,
+    changeMyAnnouncements,
+    changePresentialChecked, 
+    changeRemoteChecked, 
+    changeCleared, 
+    changeSelectValues, 
+    changeSchoolLevel, 
+    changeStates, 
+    changeCities, 
+    changePrice 
+  } = props;
 
   const schoolLevelList = [
     { label: 'Selecione a escolaridade...', value: ''},
     { label: 'Infantil', value: 'infantil'},
     { label: 'Fundamental', value: 'fundamental'},
-    { label: 'Médio', value: 'medio'},
+    { label: 'Médio', value: 'médio'},
     { label: 'Superior', value: 'superior'},
-    { label: 'Pós-graduação', value: 'pos_graduacao'},
+    { label: 'Pós-graduação', value: 'pós_graduação'},
     { label: 'Mestrado', value: 'mestrado'},
     { label: 'Doutorado', value: 'doutorado'},
   ]
 
   const handleClearFilters = () => {
-    setSelectValues({ cleared: cleared, state: cleared });
-    setPresentialChecked(false);
-    setRemoteChecked(false);
-    setCleared(!cleared)
-    setStates([]);
-    setCities([]);
-    setPrice(null)
-    setSchoolLevel('');
+    changeSelectValues({ cleared: cleared, state: cleared });
+    changeMyAnnouncements(false);
+    changePresentialChecked(false);
+    changeRemoteChecked(false);
+    changeCleared(!cleared)
+    changeStates([]);
+    changeCities([]);
+    changePrice('');
+    changeSchoolLevel('');
   }
 
   useEffect(() => {
-    fetchStates().then(parseStates).then(setStates);
+    fetchStates().then(parseStates).then(changeStates);
   }, [selectValues.cleared]);
 
   useEffect(() => {
-    setCities([{ label: 'Carregando...', value: '' }]);
-    fetchCitiesForState(selectValues.state).then(parseCities).then(setCities);
+    changeCities([{ label: 'Carregando...', value: '' }]);
+    fetchCitiesForState(selectValues.state).then(parseCities).then(changeCities);
   }, [selectValues.state]);
 
   const handleSelectChange = (e) => {
@@ -53,27 +66,33 @@ export const FilterContainer = () => {
     const {value, name} = e.target;
 
     if(name === 'state') {
-      setSelectValues({ [name]: value })
+      changeSelectValues({ [name]: value })
     } else {
-      setSelectValues({ ...selectValues, [name]: value })
+      changeSelectValues({ ...selectValues, [name]: value })
     }
   }
 
   return (
     <Container>
+      <ActiveButton 
+        state={myAnnouncements}
+        onClick={() => changeMyAnnouncements(!myAnnouncements)}
+      >
+        Meus Anúncios
+      </ActiveButton>
       <StyledPopover name="Atendimento">
         <LabelPopover>Tipo de Atendimento:</LabelPopover>
         <ButtonPopover 
           value="presencial" 
           state={presentialChecked}
-          onClick={() => setPresentialChecked(!presentialChecked)}
+          onClick={() => changePresentialChecked(!presentialChecked)}
         >
           Presencial
         </ButtonPopover>
         <ButtonPopover 
           value="remoto" 
           state={remoteChecked}
-          onClick={() => setRemoteChecked(!remoteChecked)}
+          onClick={() => changeRemoteChecked(!remoteChecked)}
         >
           Remoto
         </ButtonPopover>
@@ -99,9 +118,9 @@ export const FilterContainer = () => {
       <StyledPopover name="Preço" width="8rem">
         <LabelPopover>Preço Máximo:</LabelPopover>
         <InputCurrency 
-          value={price ? price : ''}
-          onChange={(text) => setPrice(text)}
-          placeholder="Ex.: 100,00"
+          value={price}
+          onChange={(text) => changePrice(text)}
+          placeholder="Ex.: 100.00"
         />
       </StyledPopover>
       <StyledPopover name="Grau de ensino" width="12rem">
@@ -111,7 +130,7 @@ export const FilterContainer = () => {
           name='schoolLevel' 
           data={schoolLevelList} 
           currentValue={schoolLevel}
-          onChange={(e) => setSchoolLevel(e.target.value)}
+          onChange={(e) => changeSchoolLevel(e.target.value)}
         />
       </StyledPopover>
       <ClearSpan onClick={handleClearFilters}>

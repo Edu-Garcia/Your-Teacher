@@ -13,7 +13,7 @@ class Teacher {
   biography: string;
 
   @Column()
-  lattes: string;
+  lattes: string | null;
 
   @Column()
   attendance: string;

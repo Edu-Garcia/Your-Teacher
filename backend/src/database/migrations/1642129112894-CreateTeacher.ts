@@ -18,7 +18,8 @@ export class CreateTeacher1642129112894 implements MigrationInterface {
           },
           {
             name: "lattes",
-            type: "varchar"
+            type: "varchar",
+            isNullable: true
           },
           {
             name: "attendance",

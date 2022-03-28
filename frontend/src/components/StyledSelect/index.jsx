@@ -9,6 +9,7 @@ export const StyledSelect = ({ id, name, data, currentValue, onChange = () => {}
             key={value} 
             value={value} 
             label={label}
+            {...value === '' && {disabled: true}}
           >
             {label}
           </option>

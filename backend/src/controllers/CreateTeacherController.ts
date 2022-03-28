@@ -4,7 +4,7 @@ import { CreateTeacherService } from "../services";
 class CreateTeacherController {
 
   async handle(request: Request, response: Response) {
-    const { biography, lattes, attendance, state, city } = request.body;
+    const { biography, lattes = null, attendance, state, city } = request.body;
     const { user_id } = request;
 
     const createTeacherService = new CreateTeacherService();

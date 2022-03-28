@@ -5,6 +5,7 @@ export * from './CreateAnnouncementService';
 export * from './AuthenticateUserService';
 export * from './ShowUserService';
 export * from './ShowTeacherService';
+export * from './ShowAnnouncementService';
 export * from './ListAnnouncementsService';
 export * from './ListDisciplinesService';
 export * from './DeleteUserService';

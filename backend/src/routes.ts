@@ -12,6 +12,7 @@ import {
   AuthenticateUserController,
   ShowUserController,
   ShowTeacherController,
+  ShowAnnouncementController,
   ListAnnouncementsController,
   ListDisciplinesController,
   DeleteAnnouncementController,
@@ -35,6 +36,7 @@ const createAnnouncementController = new CreateAnnouncementController();
 
 const showUserController = new ShowUserController();
 const showTeacherController = new ShowTeacherController();
+const showAnnouncementController = new ShowAnnouncementController();
 const listDisciplinesController = new ListDisciplinesController();
 const listAnnouncementsController = new ListAnnouncementsController();
 
@@ -78,6 +80,7 @@ router.post(
 router.get("/api/users", ensureAuthenticated, showUserController.handle);
 router.get("/api/teachers", ensureAuthenticated, showTeacherController.handle);
 router.get("/api/announcements", ensureAuthenticated, listAnnouncementsController.handle);
+router.get("/api/announcements/:id", ensureAuthenticated, showAnnouncementController.handle);
 router.get("/api/disciplines", ensureAuthenticated, listDisciplinesController.handle);
 
 router.delete("/api/users", ensureAuthenticated, deleteUserController.handle);

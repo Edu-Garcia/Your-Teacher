@@ -4,17 +4,78 @@ import { Container, ListCards } from './styles';
 import { Header } from '../../components/Header';
 import { FilterContainer } from '../../components/FilterContainer';
 import { Card } from '../../components/Card';
-import { Toast } from '../../components/Toast';
 import { Auth } from '../../context/AuthContext';
 
-import toast from 'react-hot-toast';
 import api from '../../config/api';
+import SearchOffIcon from '@mui/icons-material/SearchOff';
 
 export const SearchPage = () => {
-  const { token } = useContext(Auth);
+  const { token, setUser, username, user } = useContext(Auth);
 
-  const [user, setUser] = useState({});
   const [announcements, setAnnouncements] = useState([]);
+
+  const [textSearch, setTextSearch] = useState('')
+  const [myAnnouncements, setMyAnnouncements] = useState(false);
+  const [presentialChecked, setPresentialChecked] = useState(false);
+  const [remoteChecked, setRemoteChecked] = useState(false);
+  const [cleared, setCleared] = useState(false);
+  const [selectValues, setSelectValues] = useState({});
+  const [schoolLevel, setSchoolLevel] = useState('');
+  const [states, setStates] = useState([]);
+  const [cities, setCities] = useState([]);
+  const [price, setPrice] = useState('');
+
+  const changeSearch = (text) => {
+    setTextSearch(text)
+  }
+  const changePresentialChecked = (value) => {
+    setPresentialChecked(value)
+  }
+  const changeMyAnnouncements = (value) => {
+    setMyAnnouncements(value)
+  }
+  const changeRemoteChecked = (value) => {
+    setRemoteChecked(value)
+  }
+  const changeCleared = (value) => {
+    setCleared(value)
+  }
+  const changeSelectValues = (value) => {
+    setSelectValues(value)
+  }
+  const changeSchoolLevel = (value) => {
+    setSchoolLevel(value)
+  }
+  const changeStates = (value) => {
+    setStates(value)
+  }
+  const changeCities = (value) => {
+    setCities(value)
+  }
+  const changePrice = (value) => {
+    setPrice(value)
+  }
+
+  const filterProps = { 
+    myAnnouncements,
+    presentialChecked,
+    remoteChecked,
+    cleared,
+    selectValues,
+    schoolLevel,
+    states,
+    cities,
+    price,
+    changeMyAnnouncements,
+    changePresentialChecked, 
+    changeRemoteChecked, 
+    changeCleared, 
+    changeSelectValues, 
+    changeSchoolLevel, 
+    changeStates, 
+    changeCities, 
+    changePrice 
+  }
 
   useEffect(() => {
     try {
@@ -34,27 +95,100 @@ export const SearchPage = () => {
         setAnnouncements(response.data);
       });
     } catch (error) {
-      toast.error('Erro ao buscar os dados');
       console.log(error)
     }
   }, []);
 
-  console.log(user);
+  let filteredAnnouncements = [];
+  
+  if (announcements) {
+
+    
+    filteredAnnouncements = announcements.filter((item) => {
+      return myAnnouncements 
+        ? item.teacher.user.user_id === user.user_id
+        : item.teacher.user.user_id !== user.user_id
+    })
+
+    // Input Search Filter
+    filteredAnnouncements = textSearch 
+      ? filteredAnnouncements.filter((item) => (
+          item.discipline.name.toLowerCase().indexOf(textSearch) !== -1
+        )) 
+      : filteredAnnouncements;
+
+    // Attendance Filter
+    if (presentialChecked && remoteChecked) {
+      filteredAnnouncements = filteredAnnouncements.filter((item) => (
+        item.teacher.attendance.toLowerCase() === 'all'
+      ))
+    } else {
+      if (presentialChecked) {
+        filteredAnnouncements = filteredAnnouncements.filter((item) => (
+          item.teacher.attendance.toLowerCase() === 'presencial'
+        ))
+      }
+
+      if (remoteChecked) {
+        filteredAnnouncements = filteredAnnouncements.filter((item) => (
+          item.teacher.attendance.toLowerCase() === 'remoto'
+        ))
+      }
+    }
+
+    // Local Filter
+    filteredAnnouncements = typeof selectValues.state === 'string'
+      ? filteredAnnouncements.filter((item) => (
+          item.teacher.state === selectValues.state
+        )) 
+      : filteredAnnouncements;
+    
+    filteredAnnouncements = selectValues.city
+    ? filteredAnnouncements.filter((item) => (
+        item.teacher.city === selectValues.city
+      )) 
+    : filteredAnnouncements;
+
+    // Price Filter
+    filteredAnnouncements = price
+    ? filteredAnnouncements.filter((item) => (
+        parseFloat(item.cost)<=parseFloat(price)
+      ))
+    : filteredAnnouncements;
+    
+    // SchoolLevel Filter
+    filteredAnnouncements = schoolLevel
+    ? filteredAnnouncements.filter((item) => (
+        item.school_level.toLowerCase() === schoolLevel.toLowerCase()
+      )) 
+    : filteredAnnouncements;
+  }
+
 
   return (
     <Container>
       <Header 
         search 
-        link='/register'
-        profile={user?.capitalized_fullname?.split(' ')[0]}
+        textSearch={textSearch}
+        onChangeSearch={changeSearch}
+        profile={username}
       />
-      <FilterContainer />
-      <ListCards>
-        {announcements.map((item) => {
-          return <Card props={item} />
-        })}
-      </ListCards>
-      <Toast />
+      <FilterContainer props={filterProps} />
+        {filteredAnnouncements.length
+          ? (
+            <ListCards>
+              {filteredAnnouncements.map((item) => {
+                return <Card key={item.announcement_id} props={item} />
+              })}
+            </ListCards>
+          )
+          : (
+            <div className='not-found'>
+              <SearchOffIcon />
+              <span>Nenhum resultado encontrado</span>
+            </div>
+          )
+        }
     </Container>
   )
 }

@@ -22,5 +22,17 @@
     "typeError": "Data de Nascimento é um campo obrigatório",
     "min": "Data informada inválida",
     "of-age": "É necessário ter 18 anos ou mais para realizar o cadastro"
+  },
+  "biography": {
+    "required": "Biografia é um campo obrigatório"
+  },
+  "title": {
+    "required": "Título é um campo obrigatório"
+  },
+  "description": {
+    "required": "Descrição é um campo obrigatório"
+  },
+  "cost": {
+    "required": "Valor por hora é um campo obrigatório"
   }
 }

@@ -3,7 +3,7 @@ import { TeachersRepositories, UsersRepositories } from "../repositories";
 
 interface ITeacherRequest {
   biography: string;
-  lattes: string;
+  lattes: string | null;
   attendance: string;
   state: string;
   city: string;

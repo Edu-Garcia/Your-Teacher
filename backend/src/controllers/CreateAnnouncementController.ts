@@ -4,7 +4,7 @@ import { CreateAnnouncementService } from "../services";
 class CreateAnnouncementController {
   async handle(request: Request, response: Response) {
     const { user_id } = request;
-    const { filename } = request.file
+    const filename = request.file?.filename || null;
     const { title, description, cost, school_level, discipline_id } = request.body;
 
     const createAnnouncementService = new CreateAnnouncementService();

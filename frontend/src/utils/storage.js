@@ -7,7 +7,6 @@ try {
     throw Error('no local storage');
   }
 
-  // Setup simple local storage wrapper
   storage.set = (key, value) => localStorage.setItem(key, JSON.stringify(value));
   storage.get = (key) => {
     const item = localStorage.getItem(key);

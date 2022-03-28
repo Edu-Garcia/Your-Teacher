@@ -41,5 +41,42 @@ export const Container = styled.div`
       cursor: text;
       box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
     }
+
+    &[type="file"] {
+      height: 10rem;
+    }
+  }
+
+  select {
+    width: 100%;
+    height: 4rem;
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+    color: #fff;
+    background-color: #909090;
+    outline: none;
+
+    option {
+      color: #000;
+      background-color: #fff;
+    }
+  }
+
+  textarea {
+    ::-webkit-input-placeholder{
+      color: #cccccc;
+    }
+    width: 100%;
+    height: 10rem;
+    font-size: 1.8rem;
+    padding: 0.5rem 1rem;
+    color: #fff;
+    background-color: #909090;
+    border-radius: 1rem;
+    border: none;
+    outline: none;
+    box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.25);
+    transition: all 0.2s; 
+    resize: none;
   }
 `

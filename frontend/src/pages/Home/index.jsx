@@ -23,11 +23,7 @@ export const Home = () => {
             <br />
             Efetue login
           </p>
-          <Button 
-            width='19rem' 
-            height='5rem'
-            onClick={() => navigate('/login')}
-          >
+          <Button onClick={() => navigate('/login')}>
             Login
           </Button>
         </div>
@@ -37,11 +33,7 @@ export const Home = () => {
             <br />
             Cadastre-se
           </p>
-          <Button 
-            // width='19rem' 
-            // height='5rem'
-            onClick={() => navigate('/register')}
-          >
+          <Button onClick={() => navigate('/register')}>
             Cadastro
           </Button>
         </div>

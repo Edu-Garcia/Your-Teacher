@@ -1,21 +1,21 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import api from '../../config/api'
-import toast from 'react-hot-toast';
 
 import { Container } from './styles';
 import { Auth } from '../../context/AuthContext';
 import { Button } from '../../components/Button';
 import { Header } from '../../components/Header';
 import { Input } from '../../components/Input';
-import { Toast } from '../../components/Toast';
 
 export const Login = () => {
 
   const { token, setToken } = useContext(Auth);
+
+  const [error, setError] = useState(false);
 
   const navigate = useNavigate();
 
@@ -42,10 +42,9 @@ export const Login = () => {
       if (data) {
         setToken(data);
         navigate('/search', { replace: true });
-        toast.success('Login realizado com sucesso');
       }
     } catch (error) {
-      toast.error('Usuário ou senha inválidos');
+      setError(true);
       console.log(error)
     }
   }
@@ -75,6 +74,11 @@ export const Login = () => {
                 type='password'
                 error={errors?.password}
               />
+              {error && 
+                <p style={{color: '#fc4a41', fontSize: '1.5rem'}}>
+                  Usuário ou senha inválidos
+                </p>
+              }
             </form>
             <div className='submit-button'>
               <Button
@@ -82,13 +86,10 @@ export const Login = () => {
                 height='5rem'
                 type='submit'
                 onClick={handleSubmit(onSubmit)}
-                // TODO trocar onclick
-                // onClick={() => navigate('/search')}
                 background='#3E1469'
               >
                 Enviar
               </Button>
-              <Toast />
             </div>
           </div>
         </div>

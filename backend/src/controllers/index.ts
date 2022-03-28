@@ -5,6 +5,7 @@ export * from './CreateTeacherController';
 export * from './CreateUserController';
 export * from './ShowUserController';
 export * from './ShowTeacherController';
+export * from './ShowAnnouncementController';
 export * from './ListAnnouncementsController';
 export * from './ListDisciplinesController';
 export * from './DeleteAnnouncementController';

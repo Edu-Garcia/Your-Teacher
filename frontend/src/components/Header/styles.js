@@ -10,7 +10,7 @@ export const Container = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  button {
+  > button {
     width: 12rem;
     height: 3rem;
     font-size: 1.7rem;

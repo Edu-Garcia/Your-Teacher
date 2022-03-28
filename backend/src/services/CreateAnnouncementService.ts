@@ -10,7 +10,7 @@ interface IAnnouncementRequest {
   description: string;
   cost: number;
   school_level: string;
-  image_name: string;
+  image_name: string | null;
   user_id: string;
   discipline_id: string;
 }

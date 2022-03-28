@@ -60,3 +60,22 @@ export const ButtonPopover = styled.button`
   border-radius: 0.5rem;
   transition: all .2s;
 `
+
+export const ActiveButton = styled.button`
+  width: ${props => props.width || '13rem'};
+  height: 3.2rem;
+  background-color: ${props => props.state ? '#fff' : '#66439B'};
+  color: ${props => props.state ? '#66439B' : '#fff'};
+  outline: none;
+  border: none;
+  border-radius: 1rem;
+  transition: .2s;
+  box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.25);
+  user-select: none;
+  font-size: 1.5rem;
+  font-weight: ${props => props.state ? 500 : 400};;
+
+  :hover {
+    filter: brightness(110%);
+  }
+`
