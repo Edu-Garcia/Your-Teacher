@@ -9,7 +9,7 @@ import { StyledDialog } from '../StyledDialog';
 import { Auth } from '../../context/AuthContext';
 
 export const Header = ({ search, textSearch, onChangeSearch, link, buttonText, profile }) => {
-  const { token, setToken, user } = useContext(Auth);
+  const { token, setToken } = useContext(Auth);
   let navigate = useNavigate();
 
   const [isDialogVisible, setIsDialogVisible] = useState(false);

@@ -8,9 +8,9 @@ import { Button } from '../../components/Button';
 import { Header } from '../../components/Header';
 import { Input } from '../../components/Input';
 import { Auth } from '../../context/AuthContext';
-import api from '../../config/api';
 import { InputCurrency } from '../../components/InputCurrency';
 import { useNavigate } from 'react-router-dom';
+import api from '../../config/api';
 
 export const NewAnnouncement = () => {
 
@@ -39,21 +39,35 @@ export const NewAnnouncement = () => {
   }
   
   useEffect(() => {
-    if (token) {
-      api.get('/api/disciplines', {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        }
-      }).then(response => {
-        if (response.status === 200) {
-          const { data } = response;
-          const list = data.map((discipline) => ({ label: capitalize(discipline.name), value: discipline.discipline_id }))
-          setDisciplineList(list);
-          setDiscipline(list[0].value);
-        }
-      })
-    } else {
-      navigate('/login', { replace: true });
+    try {
+      if (token) {
+        api.get('/api/teachers', {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          }
+        }).then(response => {
+          if(!response.data) {
+            navigate('/register/teacher', { replace: true });
+          }
+        });
+
+        api.get('/api/disciplines', {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          }
+        }).then(response => {
+          if (response.status === 200) {
+            const { data } = response;
+            const list = data.map((discipline) => ({ label: capitalize(discipline.name), value: discipline.discipline_id }))
+            setDisciplineList(list);
+            setDiscipline(list[0].value);
+          }
+        });
+      } else {
+        navigate('/login', { replace: true });
+      }
+    } catch(error) {
+      console.log(error);
     }
   }, [])
 

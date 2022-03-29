@@ -11,8 +11,6 @@ import { AnnouncementView } from './pages/AnnouncementView';
 import { RegisterTeacher } from './pages/RegisterTeacher';
 import { NewAnnouncement } from './pages/NewAnnouncement';
 
-import { PageCalendar } from './pages/calendar';
-
 export const AppRoutes = () => {
   return (
     <BrowserRouter>
@@ -27,7 +25,6 @@ export const AppRoutes = () => {
             <Route path="/search/:id" element={<AnnouncementView />} />
             <Route path="/register/teacher" element={<RegisterTeacher />} />
             <Route path="/register/announcement" element={<NewAnnouncement />} />
-            <Route path="/calendar" element={<PageCalendar />} />
           </Route>
         </Routes>
       </AuthProvider>

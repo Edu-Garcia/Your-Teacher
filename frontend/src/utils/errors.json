@@ -18,7 +18,7 @@
     "required": "Telefone é um campo obrigatório",
     "matches": "Número inválido"
   },
-  "birthDate": {
+  "birth_date": {
     "typeError": "Data de Nascimento é um campo obrigatório",
     "min": "Data informada inválida",
     "of-age": "É necessário ter 18 anos ou mais para realizar o cadastro"

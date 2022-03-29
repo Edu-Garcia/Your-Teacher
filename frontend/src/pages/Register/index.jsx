@@ -1,5 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
@@ -9,7 +10,11 @@ import { Container } from './styles';
 import { Button } from '../../components/Button';
 import { Header } from '../../components/Header';
 import { Input } from '../../components/Input';
+import api from '../../config/api';
+
 export const Register = () => {
+
+  const navigate = useNavigate();
 
   const schema = yup.object().shape({
     fullname: yup.string().required(),
@@ -20,7 +25,7 @@ export const Register = () => {
       .string()
       .oneOf([yup.ref('password'), null])
       .required(),
-    birthDate: yup
+    birth_date: yup
       .date()
       .min(new Date(1900, 0, 1))
       .test('of-age', function(value){
@@ -35,6 +40,12 @@ export const Register = () => {
 
   const onSubmit = (user) => {
     console.log(user);
+
+    try {
+      api.post('/api/users', user).then(navigate('/login', { replace: true }))
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
@@ -84,10 +95,10 @@ export const Register = () => {
               />
               <Input 
                 label='Data de Nascimento' 
-                name='birthDate' 
+                name='birth_date' 
                 register={register}
                 type='date'
-                error={errors?.birthDate}
+                error={errors?.birth_date}
               />
             </form>
             <div className='submit-button'>

@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
@@ -15,6 +16,27 @@ import { fetchCitiesForState, fetchStates, parseCities, parseStates } from '../.
 export const RegisterTeacher = () => {
 
   const { username, token } = useContext(Auth);
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    try {
+      if (token && username) {
+        api.get('/api/teachers', {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          }
+        }).then(response => {
+          if(response.data) {
+            navigate('/register/announcement', { replace: true });
+          }
+        });
+      } else {
+        navigate('/login', { replace: true });
+      }
+    } catch(error) {
+      console.log(error);
+    }
+  }, [])
 
   const attendanceList = [
     { label: 'Remoto', value: 'remoto'},
@@ -68,8 +90,6 @@ export const RegisterTeacher = () => {
       attendance,
       ...inputValues,
     }
-
-    console.log(data)
 
     try {
       if (token) {

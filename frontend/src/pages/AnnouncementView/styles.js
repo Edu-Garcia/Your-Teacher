@@ -21,6 +21,17 @@ export const Info = styled.div`
   background-color: #fff;
   box-shadow: inset 0.5px 0.5px 2px black;
 
+  .calendar {
+    .labelCalendar {
+      margin-bottom: 2rem;
+    }
+
+    div {
+      padding: 0;
+      font-size: 1.5rem;
+    }
+  }
+
   div {
     padding: 1rem;
 

@@ -16,7 +16,7 @@ export const CardView = ({ props }) => {
 
   const { announcement_id, image_name, cost, teacher } = props;
   const { state, city, attendance, user } = teacher;
-  const { capitalized_fullname: fullname, email, phone } = user;
+  const { capitalized_fullname: fullname, email, phone, user_id } = user;
   const image = `${filesURL}/${image_name}`
 
   const helloMessage = `Olá%20${fullname},%20me%20chamo%20${username}.%20Encontrei%20seu%20anúncio%20na%20plataforma%20YourTeacher.`;
@@ -75,7 +75,7 @@ export const CardView = ({ props }) => {
           <WhatsApp /> 
           WhatsApp
         </button>
-        {loggedUser.user_id === user.user_id && (
+        {loggedUser.user_id === user_id && (
           <button 
             className="delete" 
             value={announcement_id} 
