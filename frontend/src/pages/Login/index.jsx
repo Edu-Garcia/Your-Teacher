@@ -13,7 +13,7 @@ import { Input } from '../../components/Input';
 
 export const Login = () => {
 
-  const { token, setToken } = useContext(Auth);
+  const { token, setToken, username } = useContext(Auth);
 
   const [error, setError] = useState(false);
 
@@ -29,7 +29,7 @@ export const Login = () => {
   });
 
   useEffect(() => {
-    if (token) {
+    if (token && username) {
       navigate('/search', { replace: true });
     }
   },[])
