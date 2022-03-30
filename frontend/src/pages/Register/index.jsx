@@ -89,6 +89,7 @@ export const Register = () => {
               <Input 
                 label='Telefone' 
                 name='phone' 
+                placeholder='DDD + Número'
                 register={register}
                 type='tel'
                 error={errors?.phone}
