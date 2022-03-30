@@ -54,7 +54,7 @@ export const AnnouncementView = () => {
           <Info>
             <div className="biography">
               <h2>Biografia do professor</h2>
-              <p>{capitalize(lorem)}</p>
+              <p>{capitalize(announcement.teacher.biography)}</p>
             </div>
             {idLattes && (
               <div className="lattes">
