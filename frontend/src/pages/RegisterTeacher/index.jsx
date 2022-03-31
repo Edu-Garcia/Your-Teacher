@@ -41,7 +41,7 @@ export const RegisterTeacher = () => {
   const attendanceList = [
     { label: 'Remoto', value: 'remoto'},
     { label: 'Presencial', value: 'presencial'},
-    { label: 'Ambos', value: 'all'},
+    { label: 'Híbrido', value: 'all'},
   ]
 
   const [selectValues, setSelectValues] = useState({});
