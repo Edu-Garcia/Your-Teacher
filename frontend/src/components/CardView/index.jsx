@@ -24,7 +24,7 @@ export const CardView = ({ props }) => {
 
   const handleMail = (e) => {
     const email = e.target.value;
-    window.open(`mailto:${email}?subject=Anúncio%20YourTeacher;body=${defaultMessage}`);
+    window.open(`mailto:${email}?subject=Anúncio%20YourTeacher&body=${defaultMessage}`);
   }
   
   const handleMessage = (e) => {
