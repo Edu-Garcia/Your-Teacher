@@ -103,7 +103,6 @@ export const SearchPage = () => {
   
   if (announcements) {
 
-    
     filteredAnnouncements = announcements.filter((item) => {
       return myAnnouncements 
         ? item.teacher.user.user_id === user.user_id
@@ -112,9 +111,13 @@ export const SearchPage = () => {
 
     // Input Search Filter
     filteredAnnouncements = textSearch 
-      ? filteredAnnouncements.filter((item) => (
-          item.discipline.name.toLowerCase().indexOf(textSearch) !== -1
-        )) 
+      ? filteredAnnouncements.filter((item) => {
+          const disciplineName = item.discipline.name.toLowerCase();
+          const disciplineNameNormalize = disciplineName.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+          if (disciplineName.indexOf(textSearch) !== -1 || disciplineNameNormalize.indexOf(textSearch) !== -1) {
+            return item;
+          }
+      }) 
       : filteredAnnouncements;
 
     // Attendance Filter

@@ -10,7 +10,6 @@ export const SearchField = ({ search, value, onChange, ...inputProps }) => {
     event.target.value = value
 
     onChange(value)
-    console.log('value ',value)
   }
   
 
