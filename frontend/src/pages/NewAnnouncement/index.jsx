@@ -41,16 +41,6 @@ export const NewAnnouncement = () => {
   useEffect(() => {
     try {
       if (token) {
-        api.get('/api/teachers', {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-          }
-        }).then(response => {
-          if(!response.data) {
-            navigate('/register/teacher', { replace: true });
-          }
-        });
-
         api.get('/api/disciplines', {
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -102,7 +92,11 @@ export const NewAnnouncement = () => {
             'Content-Type': 'multipart/form-data',
             'Authorization': `Bearer ${token}`,
           }
-        }).then(navigate('/search', { replace: true }))
+        }).then((response) => {
+          if (response.data) {
+            navigate('/search', { replace: true })
+          }
+        })
       }
     } catch (error) {
       console.log(error)

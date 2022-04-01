@@ -1,12 +1,34 @@
-import { useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Refresh } from '@mui/icons-material'
 import { StyledPopover } from '../StyledPopover';
 import { InputCurrency } from '../InputCurrency';
 import { StyledSelect } from '../StyledSelect';
 import { Container, ClearSpan, LabelPopover, ButtonPopover, ActiveButton } from "./styles"
 import { fetchCitiesForState, fetchStates, parseCities, parseStates } from '../../utils/ibge';
+import { Auth } from '../../context/AuthContext';
+import api from '../../config/api';
 
 export const FilterContainer = ({props}) => {
+
+  const [isTeacher, setIsTeacher] = useState(false);
+  const { token, username } = useContext(Auth)
+
+  useEffect(() => {
+    try {
+      if (token && username) {
+        api.get('/api/teachers', {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          }
+        }).then(response => {
+          console.log(response.data);
+          response.data && setIsTeacher(true)
+        });
+      }
+    } catch(error) {
+      console.log(error);
+    }
+  }, [])
 
   const {
     myAnnouncements,
@@ -74,12 +96,14 @@ export const FilterContainer = ({props}) => {
 
   return (
     <Container>
-      <ActiveButton 
-        state={myAnnouncements}
-        onClick={() => changeMyAnnouncements(!myAnnouncements)}
-      >
-        Meus Anúncios
-      </ActiveButton>
+      {isTeacher && 
+        <ActiveButton 
+          state={myAnnouncements}
+          onClick={() => changeMyAnnouncements(!myAnnouncements)}
+        >
+          Meus Anúncios
+        </ActiveButton>
+      }
       <StyledPopover name="Atendimento">
         <LabelPopover>Tipo de Atendimento:</LabelPopover>
         <ButtonPopover 
