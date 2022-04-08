@@ -128,13 +128,15 @@ export const SearchPage = () => {
     } else {
       if (presentialChecked) {
         filteredAnnouncements = filteredAnnouncements.filter((item) => (
-          item.teacher.attendance.toLowerCase() === 'presencial'
+          item.teacher.attendance.toLowerCase() === 'presencial' ||
+          item.teacher.attendance.toLowerCase() === 'all'
         ))
       }
 
       if (remoteChecked) {
         filteredAnnouncements = filteredAnnouncements.filter((item) => (
-          item.teacher.attendance.toLowerCase() === 'remoto'
+          item.teacher.attendance.toLowerCase() === 'remoto' ||
+          item.teacher.attendance.toLowerCase() === 'all'
         ))
       }
     }

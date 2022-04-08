@@ -45,7 +45,7 @@ export const RegisterTeacher = () => {
   ]
 
   const [selectValues, setSelectValues] = useState({});
-  const [attendance, setAttendance] = useState('');
+  const [attendance, setAttendance] = useState('remoto');
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
   const [error, setError] = useState(false)
