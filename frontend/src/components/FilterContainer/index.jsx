@@ -5,30 +5,8 @@ import { InputCurrency } from '../InputCurrency';
 import { StyledSelect } from '../StyledSelect';
 import { Container, ClearSpan, LabelPopover, ButtonPopover, ActiveButton } from "./styles"
 import { fetchCitiesForState, fetchStates, parseCities, parseStates } from '../../utils/ibge';
-import { Auth } from '../../context/AuthContext';
-import api from '../../config/api';
 
 export const FilterContainer = ({props}) => {
-
-  const [isTeacher, setIsTeacher] = useState(false);
-  const { token, username } = useContext(Auth)
-
-  useEffect(() => {
-    try {
-      if (token && username) {
-        api.get('/api/teachers', {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-          }
-        }).then(response => {
-          console.log(response.data);
-          response.data && setIsTeacher(true)
-        });
-      }
-    } catch(error) {
-      console.log(error);
-    }
-  }, [])
 
   const {
     myAnnouncements,
@@ -48,7 +26,8 @@ export const FilterContainer = ({props}) => {
     changeSchoolLevel, 
     changeStates, 
     changeCities, 
-    changePrice 
+    changePrice,
+    isTeacher
   } = props;
 
   const schoolLevelList = [

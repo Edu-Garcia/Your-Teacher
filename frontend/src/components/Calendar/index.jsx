@@ -66,6 +66,11 @@ export const Calendar = ({ isTeacher, helloMessage, phoneTeacher, announcement_i
   const dateClick = (dateClickInfo, announcement_id) => {
     const { date } = dateClickInfo
 
+    if(date.toJSON() < new Date().toJSON()) {
+      alert('Horário indisponível');
+      return;
+    }
+
     if (!confirm('Deseja adicionar um evento?')) return
 
     const end = new Date(date.getTime());

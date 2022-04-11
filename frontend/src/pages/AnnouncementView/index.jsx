@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Header } from "../../components/Header";
 import { CardView } from "../../components/CardView";
 import { Calendar } from "../../components/Calendar";
@@ -11,6 +11,8 @@ export const AnnouncementView = () => {
   const { username, user: loggedUser, token } = useContext(Auth);
   const { id } = useParams();
 
+  const navigate = useNavigate();
+
   const [announcement, setAnnouncement] = useState(null);
   let isTeacher;
   let idLattes;
@@ -19,13 +21,19 @@ export const AnnouncementView = () => {
   let phoneTeacher;
 
   useEffect(() => {
-    api.get(`/api/announcements/${id}`, {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-      }
-    }).then(response => {
-      setAnnouncement(response.data[0]);
-    });
+    if (token && username) {
+      api.get(`/api/announcements/${id}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        }
+      }).then(response => {
+        console.log(response.data[0])
+
+        setAnnouncement(response.data[0]);
+      });
+    } else {
+      navigate('/search', { replace: true });
+    }
   }, [])
 
   if (announcement) {

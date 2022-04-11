@@ -31,7 +31,7 @@ export const RegisterTeacher = () => {
           }
         });
       } else {
-        navigate('/login', { replace: true });
+        navigate('/search', { replace: true });
       }
     } catch(error) {
       console.log(error);

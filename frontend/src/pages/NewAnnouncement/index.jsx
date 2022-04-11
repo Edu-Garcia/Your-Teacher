@@ -40,7 +40,7 @@ export const NewAnnouncement = () => {
   
   useEffect(() => {
     try {
-      if (token) {
+      if (token && username) {
         api.get('/api/disciplines', {
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -54,7 +54,7 @@ export const NewAnnouncement = () => {
           }
         });
       } else {
-        navigate('/login', { replace: true });
+        navigate('/search', { replace: true });
       }
     } catch(error) {
       console.log(error);

@@ -13,6 +13,7 @@ export const SearchPage = () => {
   const { token, setUser, username, user } = useContext(Auth);
 
   const [announcements, setAnnouncements] = useState([]);
+  const [isTeacher, setIsTeacher] = useState(false);
 
   const [textSearch, setTextSearch] = useState('')
   const [myAnnouncements, setMyAnnouncements] = useState(false);
@@ -74,7 +75,8 @@ export const SearchPage = () => {
     changeSchoolLevel, 
     changeStates, 
     changeCities, 
-    changePrice 
+    changePrice,
+    isTeacher
   }
 
   useEffect(() => {
@@ -93,6 +95,14 @@ export const SearchPage = () => {
         },
       }).then((response) => {
         setAnnouncements(response.data);
+      });
+
+      api.get('/api/teachers', {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        }
+      }).then((response) => {
+        response.data && setIsTeacher(true)
       });
     } catch (error) {
       console.log(error)
